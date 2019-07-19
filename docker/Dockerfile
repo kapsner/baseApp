@@ -1,0 +1,55 @@
+FROM r-base
+
+# install necessary system dependencies for r packages (e.g. devtools, RPostgres)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libxml2-dev \
+    apt-utils \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    libpq-dev \
+    pandoc \
+    pandoc-citeproc
+
+ARG p_base="devtools \
+    git2r \
+    getPass"
+
+RUN for package in $p_base; do \
+    R -q -e "p <- \"$package\"; if (isFALSE(p %in% installed.packages()[,\"Package\"])){; cat(paste(\"Installing package:\", p, \"\n\n\")); install.packages(p, repos = \"https://ftp.fau.de/cran/\", quiet=T);} else {;cat(paste(\"Package\", p, \"is already installed\n\n\"));}"; \
+    done
+
+ARG gitusername
+ARG gitpassword
+
+# install our R-Package
+RUN R -q -e "devtools::install_github(\"kapsner/baseApp\")"
+
+# install tinytex
+RUN R -q -e 'tinytex::install_tinytex()'
+
+# install required LaTeX-Packages
+RUN ./root/.TinyTeX/bin/x86_64-linux/tlmgr update --self
+RUN ./root/.TinyTeX/bin/x86_64-linux/tlmgr install \
+    multirow \
+    xcolor \
+    colortbl \
+    wrapfig \
+    float \
+    tabu \
+    varwidth \
+    threeparttable \
+    threeparttablex \
+    environ \
+    trimspaces \
+    ulem \
+    makecell \
+    babel \
+    babel-german \
+    hyphen-german \
+    lm
+
+RUN echo "options(shiny.port = 3838)" >> /etc/R/Rprofile.site && \
+    echo "options(shiny.host = '0.0.0.0')" >> /etc/R/Rprofile.site && \
+    echo "options(shiny.launch.browser = FALSE)" >> /etc/R/Rprofile.site
+
+CMD ["R", "-e library(baseApp);launchApp()"]

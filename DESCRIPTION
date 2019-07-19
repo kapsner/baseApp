@@ -1,0 +1,32 @@
+Package: baseApp
+Title: A shiny base app
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Name",
+           family = "Surname",
+           role = c("cre", "aut"),
+           email = "name.surname@email.org")
+Description: A package containing a basic shiny app. A good starting point for shiny app development.
+License: GPL-3
+LazyData: true
+URL: https://github.com/kapsner/baseApp
+BugReports: https://github.com/kapsner/baseApp/issues
+Encoding: UTF-8
+Date/Publication: 2019-07-19 08:21:06 UTC
+Imports: 
+    data.table,
+    shiny,
+    shinydashboard,
+    shinyFiles,
+    shinyjs,
+    ggplot2,
+    magrittr,
+    stats,
+    graphics,
+    DT,
+    openxlsx,
+    jsonlite
+Suggests: 
+    testthat,
+    processx
+RoxygenNote: 6.1.1
