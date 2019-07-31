@@ -13,7 +13,7 @@ my_desc$set_authors(c(
 # Remove some author fields
 my_desc$del("Maintainer")
 # Set the version
-my_desc$set_version("0.0.0.9000")
+my_desc$set_version("0.0.0.9001")
 # The title of your package
 my_desc$set(Title = "A shiny base app")
 # The description of your package
@@ -73,3 +73,7 @@ usethis::use_git_ignore("inst/application/_settings/")
 usethis::use_git_ignore(".Rhistory")
 usethis::use_git_ignore("*.Rproj")
 usethis::use_git_ignore(".Rproj*")
+
+
+# code coverage
+#covr::package_coverage()
