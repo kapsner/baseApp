@@ -1,4 +1,5 @@
-FROM r-base
+# https://hub.docker.com/r/rocker/shiny/
+FROM rocker/shiny-verse
 
 # install necessary system dependencies for r packages (e.g. devtools, RPostgres)
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -8,28 +9,28 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libssl-dev \
     libpq-dev \
     pandoc \
-    pandoc-citeproc
+    pandoc-citeproc \
+    gpg-agent
 
 ARG p_base="devtools \
     git2r \
-    getPass"
+    tinytex"
 
 RUN for package in $p_base; do \
     R -q -e "p <- \"$package\"; if (isFALSE(p %in% installed.packages()[,\"Package\"])){; cat(paste(\"Installing package:\", p, \"\n\n\")); install.packages(p, repos = \"https://ftp.fau.de/cran/\", quiet=T);} else {;cat(paste(\"Package\", p, \"is already installed\n\n\"));}"; \
     done
 
-ARG gitusername
-ARG gitpassword
-
 # install our R-Package
 RUN R -q -e "devtools::install_github(\"kapsner/baseApp\")"
 
 # install tinytex
+USER shiny
 RUN R -q -e 'tinytex::install_tinytex()'
+USER root
 
 # install required LaTeX-Packages
-RUN ./root/.TinyTeX/bin/x86_64-linux/tlmgr update --self
-RUN ./root/.TinyTeX/bin/x86_64-linux/tlmgr install \
+RUN ./home/shiny/.TinyTeX/bin/x86_64-linux/tlmgr update --self
+RUN ./home/shiny/.TinyTeX/bin/x86_64-linux/tlmgr install \
     multirow \
     xcolor \
     colortbl \
@@ -46,10 +47,34 @@ RUN ./root/.TinyTeX/bin/x86_64-linux/tlmgr install \
     babel \
     babel-german \
     hyphen-german \
-    lm
+    lm \
+    hyperref \
+    url \
+    graphics-def \
+    titling \
+    caption \
+    amsmath \
+    amsfonts \
+    tools \
+    oberdiek \
+    graphics \
+    latex-graphics-dev \
+    geometry \
+    ec \
+    ifxetex \
+    ifluatex
 
-RUN echo "options(shiny.port = 3838)" >> /etc/R/Rprofile.site && \
-    echo "options(shiny.host = '0.0.0.0')" >> /etc/R/Rprofile.site && \
-    echo "options(shiny.launch.browser = FALSE)" >> /etc/R/Rprofile.site
+# add shiny app
+ADD app.R /srv/shiny-server/
 
-CMD ["R", "-e library(baseApp);launchApp()"]
+# fix permissions
+RUN chown -R shiny:shiny /srv/shiny-server/
+
+# add custom server conf (running shiny as user 'shiny' is more secure than running as 'root')
+ADD shiny-server.conf /etc/shiny-server/
+
+# add log-script
+ADD show-log.sh /
+RUN chmod +x show-log.sh
+
+CMD ["/usr/bin/shiny-server.sh"]

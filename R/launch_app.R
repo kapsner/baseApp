@@ -28,5 +28,5 @@
 #'
 launchApp <- function(port=3838){
   options(shiny.port = port)
-  shiny::runApp(appDir = system.file("application", package = "baseApp"))
+  shiny::shinyAppDir(appDir = system.file("application", package = "baseApp"))
 }

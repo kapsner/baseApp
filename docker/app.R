@@ -1,0 +1,2 @@
+library(baseApp)
+launchApp()
