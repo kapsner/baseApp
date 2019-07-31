@@ -79,7 +79,7 @@ RUN cd /home/shiny/${REPO_NAME}/docker && \
     # add log-script
     cp show-log.sh /
 
-# fix permissions
+# fix permissions of directories, where R/ the app need rights to write
 RUN chown -R shiny:shiny /srv/shiny-server/
 RUN chmod +x show-log.sh
 
