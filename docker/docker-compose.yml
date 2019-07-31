@@ -3,7 +3,7 @@ version: '3'
 services:
   base_app:
     container_name: base_app
-    image: baseApp
+    image: baseapp
     restart: unless-stopped
     ports:
     - "3838:3838"
