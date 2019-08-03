@@ -13,6 +13,7 @@ test_that("correct startup",{
   # We're creating a new process that runs the app
   # print(list.files())
   # print(list.files(utildir))
+  skip_on_cran()
   x <- process$new(
     "R",
     c(
