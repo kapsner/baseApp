@@ -14,15 +14,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git
 
 ARG p_base="devtools \
-    git2r \
     tinytex"
 
 RUN for package in $p_base; do \
     R -q -e "p <- \"$package\"; if (isFALSE(p %in% installed.packages()[,\"Package\"])){; cat(paste(\"Installing package:\", p, \"\n\n\")); install.packages(p, repos = \"https://ftp.fau.de/cran/\", quiet=T);} else {;cat(paste(\"Package\", p, \"is already installed\n\n\"));}"; \
     done
-
-# install our R-Package
-RUN R -q -e "devtools::install_github(\"kapsner/baseApp\")"
 
 # install tinytex
 USER shiny
@@ -65,11 +61,15 @@ RUN ./home/shiny/.TinyTeX/bin/x86_64-linux/tlmgr install \
     ifxetex \
     ifluatex
 
-# clone repo
-RUN cd /home/shiny &&\
-    git clone https://github.com/kapsner/baseApp.git
-
+# repository name
 ARG REPO_NAME=baseApp
+
+# add cloned repo
+COPY ./addfolder /home/shiny/
+
+# install our R-Package
+RUN cd /home/shiny/${REPO_NAME}/ && \
+    R -q -e "devtools::install('.')"
 
 # add shiny app
 RUN cd /home/shiny/${REPO_NAME}/docker && \
@@ -78,6 +78,7 @@ RUN cd /home/shiny/${REPO_NAME}/docker && \
     cp shiny-server.conf /etc/shiny-server/ && \
     # add log-script
     cp show-log.sh /
+
 
 # fix permissions of directories, where R/ the app need rights to write
 RUN chown -R shiny:shiny /srv/shiny-server/
