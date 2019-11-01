@@ -11,9 +11,9 @@ variables:
 
 .docker_registry:
   before_script:
-    - echo ${CI_REGISTRY_PASSWORD} | docker login -u ${CI_REGISTRY_USER} ${DOCKER_REGISTRY} --password-stdin
+    - echo ${CI_REGISTRY_PASSWORD} | docker login -u ${CI_REGISTRY_USER} ${CI_REGISTRY} --password-stdin
   after_script:
-    - docker logout ${DOCKER_REGISTRY}
+    - docker logout ${CI_REGISTRY}
 
 default:
   image: ${CI_IMAGE_NAME}:${CI_IMAGE_TAG}
