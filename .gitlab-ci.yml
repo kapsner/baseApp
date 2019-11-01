@@ -1,41 +1,19 @@
 variables:
   _R_CHECK_CRAN_INCOMING_: "false"
   _R_CHECK_FORCE_SUGGESTS_: "true"
-  DOCKER_HOST: "tcp://docker:2375"
-  DOCKER_REGISTRY: "${CI_REGISTRY}"
-  IMAGE_PATH: "kapsner"
-  CI_IMAGE_NAME: "${DOCKER_REGISTRY}/${IMAGE_PATH}/baseapp/${CI_PROJECT_NAME}_base_image"
+  CI_IMAGE_NAME: "rocker/verse"
+  CI_IMAGE_TAG: "3.6.1"
   R_PKG_NAME: "baseApp"
-  CI_IMAGE_TAG: "0.0.1"
-# https://docs.gitlab.com/ee/user/packages/container_registry/#enable-the-container-registry-for-your-project
-
-.docker_registry:
-  before_script:
-    - echo ${CI_REGISTRY_PASSWORD} | docker login -u ${CI_REGISTRY_USER} ${CI_REGISTRY} --password-stdin
-  after_script:
-    - docker logout ${CI_REGISTRY}
 
 default:
   image: ${CI_IMAGE_NAME}:${CI_IMAGE_TAG}
-
-# https://gitlab.com/gitlab-org/gitlab/issues/22801
-build_base_image:
-  stage: dependencies
-  image: docker:stable
-  extends: .docker_registry
-  script:
-    - cd .. && docker build --build-arg PKG_NAME=${R_PKG_NAME} -t ${CI_IMAGE_NAME}:${CI_IMAGE_TAG} -f ${CI_PROJECT_NAME}/ci/Dockerfile .
-    - docker push ${CI_IMAGE_NAME}
-  only:
-    # build only when there are changes in dependencies
-    changes:
-      - "data-raw/devstuffs.R"
-      - "ci/Dockerfile"
-  tags:
-    - docker
+  before_script:
+    - echo "options('repos' = 'https://ftp.fau.de/cran/')" >> /usr/local/lib/R/etc/Rprofile.site
+    - R -e "devtools::install_deps(pkg = '.', upgrade = 'always')"
+    - R -e "devtools::install_dev_deps(pkg = '.', upgrade = 'always')"
+    - mkdir -p ci
 
 stages:
-  - dependencies
   - build
   - test
   - deploy
