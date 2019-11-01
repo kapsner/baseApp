@@ -5,3 +5,4 @@
 ^docker$
 ^inst/application/_settings$
 ^\.gitlab-ci\.yml$
+^ci$

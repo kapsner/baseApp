@@ -85,6 +85,7 @@ usethis::use_package("lintr", type = "Suggests")
 
 # buildignore and gitignore
 usethis::use_build_ignore("docker")
+usethis::use_build_ignore("ci")
 usethis::use_build_ignore("inst/application/_settings/")
 usethis::use_git_ignore("inst/application/_settings/")
 usethis::use_git_ignore(".Rhistory")
