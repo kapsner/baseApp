@@ -75,7 +75,7 @@ usethis::use_package("stats", type="Imports")
 usethis::use_package("graphics", type="Imports")
 usethis::use_package("DT", type="Imports")
 usethis::use_package("openxlsx", type="Imports")
-usethis::use_package("jsonlite", type="Imports")
+usethis::use_package("jsonlite", type = "Imports")
 
 # Suggests
 usethis::use_package("testthat", type = "Suggests")
