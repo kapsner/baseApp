@@ -1,2 +1,2 @@
 library(baseApp)
-launchApp()
+launch_app()

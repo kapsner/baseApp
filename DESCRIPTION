@@ -1,6 +1,6 @@
 Package: baseApp
 Title: A shiny base app
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Authors@R: 
     person(given = "Lorenz",
            family = "Kapsner",
@@ -12,7 +12,7 @@ LazyData: true
 URL: https://github.com/kapsner/baseApp
 BugReports: https://github.com/kapsner/baseApp/issues
 Encoding: UTF-8
-Date/Publication: 2019-08-02 14:36:47 UTC
+Date/Publication: 2019-11-01 12:04:22 UTC
 Imports: 
     data.table,
     shiny,
@@ -28,5 +28,6 @@ Imports:
     jsonlite
 Suggests: 
     testthat,
-    processx
+    processx,
+    lintr
 RoxygenNote: 6.1.1

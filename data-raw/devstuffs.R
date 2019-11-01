@@ -5,12 +5,12 @@
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -29,7 +29,7 @@ my_desc$set_authors(c(
 # Remove some author fields
 my_desc$del("Maintainer")
 # Set the version
-my_desc$set_version("0.0.0.9001")
+my_desc$set_version("0.0.0.9002")
 # The title of your package
 my_desc$set(Title = "A shiny base app")
 # The description of your package
@@ -80,6 +80,7 @@ usethis::use_package("jsonlite", type="Imports")
 # Suggests
 usethis::use_package("testthat", type = "Suggests")
 usethis::use_package("processx", type = "Suggests")
+usethis::use_package("lintr", type = "Suggests")
 
 
 # buildignore and gitignore
