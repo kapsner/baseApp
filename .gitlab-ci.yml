@@ -2,10 +2,11 @@ variables:
   _R_CHECK_CRAN_INCOMING_: "false"
   _R_CHECK_FORCE_SUGGESTS_: "true"
   DOCKER_REGISTRY: "registry.gitlab.com"
-  IMAGE_PATH: "kapsner"
-  CI_IMAGE_NAME: "${DOCKER_REGISTRY}/${IMAGE_PATH}/${CI_PROJECT_NAME}_base_image"
-  CI_IMAGE_TAG: "0.0.1"
   R_PKG_NAME: "baseApp"
+  IMAGE_PATH: "kapsner"
+  CI_IMAGE_NAME: "${DOCKER_REGISTRY}/${IMAGE_PATH}/${R_PKG_NAME}/${CI_PROJECT_NAME}_base_image"
+  CI_IMAGE_TAG: "0.0.1"
+# https://docs.gitlab.com/ee/user/packages/container_registry/#enable-the-container-registry-for-your-project
 
 .docker_registry:
   before_script:
