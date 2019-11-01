@@ -1,7 +1,7 @@
 variables:
   _R_CHECK_CRAN_INCOMING_: "false"
   _R_CHECK_FORCE_SUGGESTS_: "true"
-  DOCKER_REGISTRY: "registry.gitlab.com"
+  DOCKER_REGISTRY: "tcp://docker:2378"
   IMAGE_PATH: "kapsner"
   CI_IMAGE_NAME: "${DOCKER_REGISTRY}/${IMAGE_PATH}/${CI_PROJECT_NAME}/${CI_PROJECT_NAME}_base_image"
   R_PKG_NAME: "baseApp"
