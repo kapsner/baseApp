@@ -5,7 +5,7 @@ Authors@R:
     person(given = "Lorenz",
            family = "Kapsner",
            role = c("cre", "aut"),
-           email = "lorenz.kapsner@web.de")
+           email = "lorenz.kapsner@gmail.com")
 Description: A package containing a basic shiny app. A good starting point for shiny app development.
 License: GPL-3
 LazyData: true
