@@ -12,7 +12,7 @@ LazyData: true
 URL: https://github.com/kapsner/baseApp
 BugReports: https://github.com/kapsner/baseApp/issues
 Encoding: UTF-8
-Date/Publication: 2019-11-01 12:25:22 UTC
+Date/Publication: 2019-12-15 12:19:07 UTC
 Imports: 
     data.table,
     shiny,
@@ -30,3 +30,4 @@ Suggests:
     testthat,
     processx,
     lintr
+RoxygenNote: 7.0.1
