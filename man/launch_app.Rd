@@ -4,10 +4,12 @@
 \alias{launch_app}
 \title{Launch the shiny baseApp}
 \usage{
-launch_app(port = 3838)
+launch_app(port = 3838, dir = tempdir())
 }
 \arguments{
 \item{port}{The port, baseApp is running on (default: 3838)}
+
+\item{dir}{A character string. The (absolute) path of ...}
 }
 \value{
 baseApp application

@@ -18,6 +18,7 @@
 #' @title Launch the shiny baseApp
 #'
 #' @param port The port, baseApp is running on (default: 3838)
+#' @param dir A character string. The (absolute) path of ...
 #'
 #' @return baseApp application
 #'
@@ -27,7 +28,26 @@
 #'
 #' @export
 #'
-launch_app <- function(port=3838) {
+launch_app <- function(
+  port = 3838,
+  dir = tempdir()
+) {
+
+  global_env_hack <- function(key,
+                              val,
+                              pos) {
+    assign(
+      key,
+      val,
+      envir = as.environment(pos)
+    )
+  }
+
+  global_env_hack("dir",
+                  dir,
+                  1L)
+
+
   options(shiny.port = port)
   shiny::shinyAppDir(
     appDir = system.file("application", package = "baseApp")

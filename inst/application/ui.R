@@ -48,7 +48,12 @@ shiny::shinyUI(
                          "margin: 6px 10px 6px 10px;",
                          "box-sizing:border-box;",
                          "heigth: auto; width: 230px;"),
-          shiny::HTML("\u00A9 Lorenz A. Kapsner</i>"))
+          shiny::HTML(
+            paste0(
+              "Version: ", utils::packageVersion("baseApp"),
+              "<br/><br/>\u00A9 Given Family<br/>"
+            )
+          ))
       ),
 
       shinydashboard::dashboardBody(

@@ -21,3 +21,7 @@ inst/application/_settings/
 /.Rproj*
 /.RData
 .Rproj.user
+!/*.Rproj
+!/docker_deployment
+/.vscode
+!/.lintr

@@ -16,6 +16,13 @@
 
 packagename <- "baseApp"
 
+person1 <- person(
+  given = "Given",
+  family = "Family",
+  email = "given.family@name.com",
+  role = c('cre', 'aut')
+)
+
 # remove existing description object
 unlink("DESCRIPTION")
 # Create a new description object
@@ -23,17 +30,23 @@ my_desc <- desc::description$new("!new")
 # Set your package name
 my_desc$set("Package", packagename)
 # Set author names
-my_desc$set_authors(c(
-  person("Lorenz", "Kapsner", email = "lorenz.kapsner@gmail.com", role = c('cre', 'aut')))) #,
+my_desc$set_authors(
+  c(
+    person1
+  )
+) #,
 #  person("Name2", "Surname2", email = "mail@2", role = 'aut')))
 # Remove some author fields
 my_desc$del("Maintainer")
 # Set the version
-my_desc$set_version("0.0.0.9002")
+my_desc$set_version("0.0.0.9003")
 # The title of your package
 my_desc$set(Title = "A shiny base app")
 # The description of your package
-my_desc$set(Description = "A package containing a basic shiny app. A good starting point for shiny app development.")
+my_desc$set(Description = paste(
+  "A package containing a basic shiny app.",
+  "A good starting point for shiny app development."
+))
 # The description of your package
 my_desc$set("Date/Publication" = paste(as.character(Sys.time()), "UTC"))
 # The urls
@@ -46,7 +59,7 @@ my_desc$set("License", "GPL-3")
 my_desc$write(file = "DESCRIPTION")
 
 # License
-usethis::use_gpl3_license(name = "Lorenz Kapsner")
+usethis::use_gpl3_license(name = paste(person1$given, person1$family))
 
 
 # add Imports and Depends
@@ -69,13 +82,13 @@ usethis::use_package("shiny", type="Imports")
 usethis::use_package("shinydashboard", type="Imports")
 usethis::use_package("shinyFiles", type="Imports")
 usethis::use_package("shinyjs", type="Imports")
-usethis::use_package("ggplot2", type="Imports")
+#usethis::use_package("ggplot2", type="Imports")
 usethis::use_package("magrittr", type = "Imports")
-usethis::use_package("stats", type = "Imports")
-usethis::use_package("graphics", type = "Imports")
-usethis::use_package("DT", type = "Imports")
+#usethis::use_package("stats", type = "Imports")
+#usethis::use_package("graphics", type = "Imports")
+#usethis::use_package("DT", type = "Imports")
 usethis::use_package("openxlsx", type = "Imports")
-usethis::use_package("jsonlite", type = "Imports")
+#usethis::use_package("jsonlite", type = "Imports")
 
 # Suggests
 usethis::use_package("testthat", type = "Suggests")
@@ -84,9 +97,13 @@ usethis::use_package("lintr", type = "Suggests")
 
 
 # buildignore and gitignore
-usethis::use_build_ignore("docker")
-usethis::use_build_ignore("ci")
-usethis::use_build_ignore("inst/application/_settings/")
+usethis::use_build_ignore("LICENSE.md")
+usethis::use_build_ignore(".gitlab-ci.yml")
+usethis::use_build_ignore("data-raw")
+usethis::use_build_ignore(".vscode")
+usethis::use_build_ignore(".lintr")
+usethis::use_build_ignore("docker_deployment")
+
 usethis::use_git_ignore("/*")
 usethis::use_git_ignore("/*/")
 usethis::use_git_ignore("*.log")
@@ -106,10 +123,26 @@ usethis::use_git_ignore("!/R/")
 usethis::use_git_ignore("!/README.md")
 usethis::use_git_ignore("!/tests/")
 usethis::use_git_ignore("/.Rhistory")
-usethis::use_git_ignore("/*.Rproj")
+usethis::use_git_ignore("!/*.Rproj")
 usethis::use_git_ignore("/.Rproj*")
 usethis::use_git_ignore("/.RData")
+usethis::use_git_ignore("!/docker_deployment")
+usethis::use_git_ignore("/.vscode")
+usethis::use_git_ignore("!/.lintr")
 
 
 # code coverage
 #covr::package_coverage()
+
+# lint package
+#lintr::lint_package()
+
+# test package
+#devtools::test()
+
+# R CMD check package
+#rcmdcheck::rcmdcheck()
+#rcmdcheck::rcmdcheck(args = "--no-vignettes", build_args = "--no-build-vignettes")
+
+# tidy description
+usethis::use_tidy_description()
