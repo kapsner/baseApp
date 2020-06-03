@@ -1,4 +1,4 @@
-FROM rocker/shiny-verse:3.6.1
+FROM rocker/shiny-verse:4.0.0
 
 # install necessary system dependencies for r packages (e.g. devtools, RPostgres)
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -98,4 +98,4 @@ RUN mkdir /home/${RSESSION_USER}/logs && \
 # https://stackoverflow.com/questions/51080857/preserve-environment-variables-when-spawning-shiny-processes-within-a-container?rq=1
 ENTRYPOINT env >> /home/${RSESSION_USER}/.Renviron && \
     chown ${RSESSION_USER}.${RSESSION_USER} /home/${RSESSION_USER}/.Renviron && \
-    /usr/bin/shiny-server.sh
+    /usr/bin/shiny-server
