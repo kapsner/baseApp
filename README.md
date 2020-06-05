@@ -1,6 +1,10 @@
 # baseApp
 
 <!-- badges: start -->
+[![R CMD Check via {tic}](https://github.com/kapsner/baseApp/workflows/R%20CMD%20Check%20via%20{tic}/badge.svg?branch=master)](https://github.com/kapsner/baseApp/actions)
+[![linting](https://github.com/kapsner/baseApp/workflows/lint/badge.svg?branch=master)](https://github.com/kapsner/baseApp/actions)
+[![test-coverage](https://github.com/kapsner/baseApp/workflows/test-coverage/badge.svg?branch=master)](https://github.com/kapsner/baseApp/actions)
+[![codecov](https://codecov.io/gh/kapsner/baseApp/branch/master/graph/badge.svg)](https://codecov.io/gh/kapsner/baseApp)
 [![pipeline status](https://gitlab.com/kapsner/baseApp/badges/master/pipeline.svg)](https://gitlab.com/kapsner/baseApp/commits/master)
 [![coverage report](https://gitlab.com/kapsner/baseApp/badges/master/coverage.svg)](https://gitlab.com/kapsner/baseApp/commits/master)
 <!-- badges: end -->

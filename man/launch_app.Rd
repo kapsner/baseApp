@@ -17,3 +17,8 @@ baseApp application
 \description{
 Launch the shiny baseApp
 }
+\examples{
+\dontrun{
+launch_app()
+}
+}

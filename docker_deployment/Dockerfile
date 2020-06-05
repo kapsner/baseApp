@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git
 
 # install tinytex
-RUN echo "options('repos' = 'https://ftp.fau.de/cran/')" >> /usr/local/lib/R/etc/Rprofile.site
+RUN echo "options('repos' = 'https://cloud.r-project.org/')" >> /usr/local/lib/R/etc/Rprofile.site
 
 ENV RSESSION_USER=shiny
 

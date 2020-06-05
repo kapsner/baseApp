@@ -24,6 +24,17 @@
 #' @param input_re The Shiny server input object, wrapped into a reactive
 #'   expression: input_re = reactive({input})
 #'
+#' @return shiny module module_settings_server
+#' @examples
+#' \dontrun{
+#' module_settings_server(
+#'   input,
+#'   output,
+#'   session,
+#'   rv,
+#'   input_re
+#' )}
+#'
 #' @export
 #'
 # module_settings_server
@@ -377,6 +388,11 @@ module_settings_server <- function(input,
 #' @title module_settings_ui
 #'
 #' @param id A character. The identifier of the shiny object
+#'
+#' @return shiny module module_settings_server
+#' @examples
+#' \dontrun{
+#' module_settings_ui("id")}
 #'
 #' @export
 #'

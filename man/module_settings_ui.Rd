@@ -9,6 +9,14 @@ module_settings_ui(id)
 \arguments{
 \item{id}{A character. The identifier of the shiny object}
 }
+\value{
+shiny module module_settings_server
+}
 \description{
 module_settings_ui
+}
+\examples{
+\dontrun{
+module_settings_ui("id")}
+
 }

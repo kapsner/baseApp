@@ -26,7 +26,12 @@
 #' @importFrom magrittr "%>%"
 #' @importFrom data.table .N ":="
 #'
+#' @examples
+#' \dontrun{
+#' launch_app()
+#' }
 #' @export
+#'
 #'
 launch_app <- function(
   port = 3838,

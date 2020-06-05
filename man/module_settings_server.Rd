@@ -18,6 +18,20 @@ module_settings_server(input, output, session, rv, input_re)
 \item{input_re}{The Shiny server input object, wrapped into a reactive
 expression: input_re = reactive({input})}
 }
+\value{
+shiny module module_settings_server
+}
 \description{
 module_settings_server
+}
+\examples{
+\dontrun{
+module_settings_server(
+  input,
+  output,
+  session,
+  rv,
+  input_re
+)}
+
 }
